@@ -315,8 +315,3 @@ void printm(int L, int R, int ans)
 }
 
 //*end of the code*
-=======
-int x = 1;
-int c;
-int y = 2;
->>>>>>> 8cf50553e15fc5e5073a4bb88ede5a666c90d5b3
