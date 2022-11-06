@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-<<<<<<< HEAD
+
 #define MAX 10000//maximum length of the array
 
 // Structure to represent a query range
