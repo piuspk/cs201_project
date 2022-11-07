@@ -1,5 +1,5 @@
 /*        
-             *RANGE MINIMUM/MAXIMUM QUERY:*
+             RANGE MINIMUM/MAXIMUM QUERY:
  C code to do range minimum/maximum query using sparse table ->
  *          Time complexity= O(1)  and
  *          Preprocessing time=O(n Log n)
@@ -9,7 +9,7 @@
 // including the required header files:
 #include <stdio.h>
 #include <stdlib.h>
-
+#include<math.h>
 
 #define MAX 10000//maximum length of the array
 
@@ -27,8 +27,6 @@ int lookup_max[MAX][MAX]; // it is going to store index of maximum value in arr[
 // declaring all the functions used:
 void preprocess(int arr[], int size, int n);     // it will fill table lookup[MAX][MAX]
 void preprocess_max(int arr[], int size, int n); // it will fill table lookup[MAX][MAX]
-
-int log_size(int size); // to calculate log of the size of the array with base 2
 
 int query_min(int arr[], int L, int R, int size); // it will find the minimum of part from an index to the log of the size
 int query_max(int arr[], int L, int R, int size); // it will find the maximum of part from an index to the log of the size
@@ -82,7 +80,8 @@ int main()
 
         q->data = l;
         p->data = r;
-        q->next = p;
+        q->next = p;//linking the first node with a node
+        //just like a linked list
 
         if(l==r) 
         {
@@ -103,32 +102,6 @@ int main()
     return 0;
 }
 
-
-// calculating the log with base 2:
-int log_size(int size)
-{
-
-    int log_size = 1;
-    int j = 1;
-
-    while (1)
-    {
-        int x = (1 << j);//we will check the for 2 to the power from 1 till we get the maximum value which is less than the size
-        j++;
-
-        if (x >= size)
-        {
-            break;
-        }
-
-        else
-        {
-            log_size = j;
-        }
-    }
-
-    return log_size;
-}
 
 
 //*    CALCULATING MINIMUM VALUE:   *
@@ -205,7 +178,7 @@ void range_minimum_query(int arr[], struct Node *q, int size, int n, int m)
 int query_min(int arr[], int L, int R, int size)
 {
 
-    int j = log_size(R - L + 1); // it will be till log of base 2
+    int j = log2(R - L + 1); // it will be till log of base 2
     int x = arr[lookup[L][j]];
     int y = arr[lookup[R - (1 << j) + 1][j]];
     // For [2,10], we compare arr[lookup[0][3]] and arr[lookup[3][3]]
@@ -300,12 +273,12 @@ void preprocess_max(int arr[], int size, int n)
 int query_max(int arr[], int L, int R, int size)
 {
 
-    int j = log_size(R - L + 1); // it will be till log of base 2
-    int x = arr[lookup_max[L][j]];
-    int y = arr[lookup_max[R - (1 << j) + 1][j]];
+    int j = log2(R - L + 1); // it will be till log of base 2
+    int x = lookup_max[L][j];
+    int y = lookup_max[R - (1 << j) + 1][j];
     // For [2,10], we compare arr[lookup[0][3]] and arr[lookup[3][3]],
 
-    if (x > y)
+    if (x >= y)
     {
         return x; // returning the maximum value
     }
