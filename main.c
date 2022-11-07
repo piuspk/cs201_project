@@ -1,7 +1,6 @@
 /*        
-             **RANGE MINIMUM/MAXIMUM QUERY:**
-
- *C code to do range minimum/maximum query using sparse table* ->
+             *RANGE MINIMUM/MAXIMUM QUERY:*
+ C code to do range minimum/maximum query using sparse table ->
  *          Time complexity= O(1)  and
  *          Preprocessing time=O(n Log n)
  *          Extra space =O(n Log n)
@@ -85,9 +84,18 @@ int main()
         p->data = r;
         q->next = p;
 
-        // calling the functions:
-        range_minimum_query(a, q, size, size, 1);
-        range_maximum_query(a, q, size, size, 1);
+        if(l==r) 
+        {
+            printf("Minimum of [%d,%d] is %d",l,r,a[l]);
+            printf("\nMaximum of [%d,%d] is %d\n",l,r,a[l]);
+        }
+
+        else
+        {
+            // calling the functions:
+            range_minimum_query(a, q, size, size, 1);
+            range_maximum_query(a, q, size, size, 1);
+        }
 
         printf("\n");
     }
@@ -139,7 +147,7 @@ void preprocess(int arr[], int size, int n)
     for (int j = 1; (1 << j) <= n; j++)
     {
 
-        // Computeing minimum value for all intervals with size 2^j
+        // Computeing minimum values for all intervals with size 2^j
         for (int i = 0; 1 < 2; i++)
         {
 
@@ -193,6 +201,7 @@ void range_minimum_query(int arr[], struct Node *q, int size, int n, int m)
 
 
 // finding the minimum value:
+// or finding the smallest element...
 int query_min(int arr[], int L, int R, int size)
 {
 
@@ -249,7 +258,7 @@ void preprocess_max(int arr[], int size, int n)
     // Initialize M for the intervals with length 1
     for (int i = 0; i < n; i++)
     {
-        lookup_max[i][0] = i;
+        lookup_max[i][0] = arr[i];
     }
 
     // Compute values from smaller to bigger intervals
@@ -314,4 +323,4 @@ void printm(int L, int R, int ans)
     printf("Maximum of [%d,%d] is %d \n", L, R, ans);
 }
 
-//*end of the code*
+//end of the code
