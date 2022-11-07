@@ -139,7 +139,7 @@ void preprocess(int arr[], int size, int n)
     for (int j = 1; (1 << j) <= n; j++)
     {
 
-        // Computeing minimum value for all intervals with size 2^j
+        // Computeing minimum values for all intervals with size 2^j
         for (int i = 0; 1 < 2; i++)
         {
 
@@ -193,6 +193,7 @@ void range_minimum_query(int arr[], struct Node *q, int size, int n, int m)
 
 
 // finding the minimum value:
+// or finding the smallest element...
 int query_min(int arr[], int L, int R, int size)
 {
 
